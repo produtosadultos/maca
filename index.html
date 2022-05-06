@@ -1,0 +1,1466 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+		<title>Maca Negra Com Boro &#8211; Substituto Natural do Tribulus</title><link rel="stylesheet" href="https://macanegracomboro.net/wp-content/cache/min/1/ea828b1369c994364b937a57e4eb2779.css" media="all" data-minify="1" />
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Feed para Maca Negra Com Boro &raquo;" href="https://macanegracomboro.net/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Maca Negra Com Boro &raquo;" href="https://macanegracomboro.net/comments/feed/" />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/macanegracomboro.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+
+
+
+
+
+
+
+<link rel='stylesheet' id='google-fonts-1-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPoppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRaleway%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=5.9.3' type='text/css' media='all' />
+
+
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js' defer></script>
+<link rel="https://api.w.org/" href="https://macanegracomboro.net/wp-json/" /><link rel="alternate" type="application/json" href="https://macanegracomboro.net/wp-json/wp/v2/pages/8" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://macanegracomboro.net/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://macanegracomboro.net/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9.3" />
+<link rel="canonical" href="https://macanegracomboro.net/" />
+<link rel='shortlink' href='https://macanegracomboro.net/' />
+<link rel="alternate" type="application/json+oembed" href="https://macanegracomboro.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmacanegracomboro.net%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://macanegracomboro.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmacanegracomboro.net%2F&#038;format=xml" />
+<script type="rocketlazyloadscript">document.createElement( "picture" );if(!window.HTMLPictureElement && document.addEventListener) {window.addEventListener("DOMContentLoaded", function() {var s = document.createElement("script");s.src = "https://macanegracomboro.net/wp-content/plugins/webp-express/js/picturefill.min.js";document.body.appendChild(s);});}</script><link rel="icon" href="https://macanegracomboro.net/wp-content/uploads/2022/01/cropped-trio-Maca-Negra-com-Boro-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://macanegracomboro.net/wp-content/uploads/2022/01/cropped-trio-Maca-Negra-com-Boro-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://macanegracomboro.net/wp-content/uploads/2022/01/cropped-trio-Maca-Negra-com-Boro-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://macanegracomboro.net/wp-content/uploads/2022/01/cropped-trio-Maca-Negra-com-Boro-1-270x270.png" />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /></head>
+<body class="home page-template page-template-elementor_canvas page page-id-8 elementor-default elementor-template-canvas elementor-kit-6 elementor-page elementor-page-8">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>		<div data-elementor-type="wp-page" data-elementor-id="8" class="elementor elementor-8">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-2c7d12fd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2c7d12fd" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-wide">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-50ea52b5" data-id="50ea52b5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7abe5e8a elementor-widget elementor-widget-heading" data-id="7abe5e8a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a{color:inherit;font-size:inherit;line-height:inherit}.elementor-widget-heading .elementor-heading-title.elementor-size-small{font-size:15px}.elementor-widget-heading .elementor-heading-title.elementor-size-medium{font-size:19px}.elementor-widget-heading .elementor-heading-title.elementor-size-large{font-size:29px}.elementor-widget-heading .elementor-heading-title.elementor-size-xl{font-size:39px}.elementor-widget-heading .elementor-heading-title.elementor-size-xxl{font-size:59px}</style><h3 class="elementor-heading-title elementor-size-default">MAXIMO PRAZER SEXUAL</h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-4261f63c elementor-widget elementor-widget-heading" data-id="4261f63c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">SUBSTITUTO NATURAL DO TRIBULUS</p>		</div>
+				</div>
+				<div class="elementor-element elementor-element-188329de elementor-widget elementor-widget-heading" data-id="188329de" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">MACA NEGRA <i style="">COM BORO</i></h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-77b270e2 elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-image" data-id="77b270e2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img[src$=".svg"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}</style>												<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Kitcom3-MacaBoro-min.png.webp 1000w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Kitcom3-MacaBoro-min-300x300.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Kitcom3-MacaBoro-min-150x150.png.webp 150w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Kitcom3-MacaBoro-min-768x768.png.webp 768w" sizes="(max-width: 1000px) 100vw, 1000px" type="image/webp"><img width="1000" height="1000" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%201000'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min.png 1000w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-150x150.png 150w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-768x768.png 768w" data-lazy-sizes="(max-width: 1000px) 100vw, 1000px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min.png"><noscript><img width="1000" height="1000" src="https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min.png 1000w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-150x150.png 150w, https://macanegracomboro.net/wp-content/uploads/2022/01/Kitcom3-MacaBoro-min-768x768.png 768w" sizes="(max-width: 1000px) 100vw, 1000px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-db3d54c elementor-hidden-mobile elementor-widget elementor-widget-text-editor" data-id="db3d54c" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap{background-color:#818a91;color:#fff}.elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap{color:#818a91;border:3px solid;background-color:transparent}.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap{margin-top:8px}.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter{width:1em;height:1em}.elementor-widget-text-editor .elementor-drop-cap{float:left;text-align:center;line-height:1;font-size:50px}.elementor-widget-text-editor .elementor-drop-cap-letter{display:inline-block}</style>				<p>Com <b><i>MACA NEGRA</i></b>&nbsp;você vai experimentar uma revolução na sua vida sexual, com ereções mais duras, muito mais longas e muito poderosas, com o prazer que você nunca sentiu</p>						</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-78a1f6cd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="78a1f6cd" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-wide">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-43236b82" data-id="43236b82" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-72df730a elementor-align-left elementor-hidden-mobile elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="72df730a" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text"> POTÊNCIA MASCULINA APRIMORADA</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">MELHORA A LIBIDO E O DESEJO SEXUAL</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">DESEMPENHO ATLÉTICO</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">Mais potência: duro por mais tempo</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-5a3cfc19" data-id="5a3cfc19" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-64277783 elementor-hidden-mobile elementor-widget elementor-widget-text-editor" data-id="64277783" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							EREÇÕES + FORTES E QUE DURAM MAIS						</div>
+				</div>
+				<div class="elementor-element elementor-element-2d5c0443 elementor-hidden-mobile elementor-widget elementor-widget-image" data-id="2d5c0443" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/MacaBoro1Pote-475x865-min.png.webp 475w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/MacaBoro1Pote-475x865-min-165x300.png.webp 165w" sizes="(max-width: 475px) 100vw, 475px" type="image/webp"><img width="475" height="865" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20475%20865'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min.png 475w, https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min-165x300.png 165w" data-lazy-sizes="(max-width: 475px) 100vw, 475px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min.png"><noscript><img width="475" height="865" src="https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min.png 475w, https://macanegracomboro.net/wp-content/uploads/2022/01/MacaBoro1Pote-475x865-min-165x300.png 165w" sizes="(max-width: 475px) 100vw, 475px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-61e78ecb elementor-align-left elementor-hidden-desktop elementor-hidden-tablet elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="61e78ecb" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text"> POTÊNCIA MASCULINA APRIMORADA</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">MELHORA A LIBIDO E O DESEJO SEXUAL</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">DESEMPENHO ATLÉTICO</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">Mais potência: duro por mais tempo</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-4b8cd894" data-id="4b8cd894" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-4d0dc76a elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="4d0dc76a" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">FERTILIDADE SAUDÁVEL EM HOMENS</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">FORÇA, RESISTÊNCIA E ENERGIA</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">PRODUÇÃO NATURAL DE TESTOSTERONA</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check-circle"></i>						</span>
+										<span class="elementor-icon-list-text">Energia extra e alto desempenho sexual</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<div class="elementor-element elementor-element-31e3a6ff elementor-widget elementor-widget-image" data-id="31e3a6ff" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+																<a href="#kit">
+							<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/bt-experimente.png.webp 488w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/bt-experimente-300x68.png.webp 300w" sizes="(max-width: 488px) 100vw, 488px" type="image/webp"><img width="488" height="111" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20488%20111'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png 488w, https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente-300x68.png 300w" data-lazy-sizes="(max-width: 488px) 100vw, 488px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png"><noscript><img width="488" height="111" src="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png 488w, https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente-300x68.png 300w" sizes="(max-width: 488px) 100vw, 488px"></noscript></picture>								</a>
+															</div>
+				</div>
+				<div class="elementor-element elementor-element-390d6040 elementor-widget elementor-widget-image" data-id="390d6040" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Compra-segura-monetize-300x61-1.png.webp" type="image/webp"><img width="300" height="61" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2061'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/Compra-segura-monetize-300x61-1.png"><noscript><img width="300" height="61" src="https://macanegracomboro.net/wp-content/uploads/2022/01/Compra-segura-monetize-300x61-1.png" class="attachment-large size-large webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-30cbe5cd elementor-hidden-mobile elementor-widget elementor-widget-spacer" data-id="30cbe5cd" data-element_type="widget" data-widget_type="spacer.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.e-container.e-container--row .elementor-spacer-inner{width:var(--spacer-size)}.e-container.e-container--column .elementor-spacer-inner,.elementor-column .elementor-spacer-inner{height:var(--spacer-size)}</style>		<div class="elementor-spacer">
+			<div class="elementor-spacer-inner"></div>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-2fcfad20 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2fcfad20" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-14f1231e" data-id="14f1231e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-59b4b439 elementor-widget elementor-widget-heading" data-id="59b4b439" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">A Maca Negra Com Boro se mostrou superior ao Tribulus</p>		</div>
+				</div>
+				<div class="elementor-element elementor-element-4619e314 elementor-widget elementor-widget-heading" data-id="4619e314" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><span style="color:#20A767">no quesito ereção, desenvolvimento muscular, enrijecimento peniano e aumento da libido.</span></h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-d8537f4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d8537f4" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-1378dc91" data-id="1378dc91" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7ed2e91c elementor-widget elementor-widget-text-editor" data-id="7ed2e91c" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Maca negra com boro é o único<b> produto 100% natural</b>, seguro e eficaz que pode entregar a solução completa para os desafios da vida sexual masculina.</p><p><b>A Influencia os níveis de testosterona e aumenta a hipertrofia </b></p><p>O aumento da testosterona livre pelo Boro foi comprovada em estudo científico realizado em 2011, pelo Journal of Trace Elements in Medicine and Biology¹. É por isso que todo mundo que treina em busca de um shape insano precisa dar atenção à este mineral.</p><p>O estudo citado acima mostrou que após uma semana com suplementação diária de Boro, os homens analisados tiveram um aumento médio nos níveis de testosterona livre de incríveis 28,3%.</p><p><b>A Maca Negra pode ajustar o hipotálamo humano e a secreção de hormônios (como testosterona, DHEA e hormônios) ao nível normal. Assim, pode melhorar a disfunção sexual, aumentar a contagem de espermatozóides masculinos e melhorar a fertilidade</b></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-205da1ea" data-id="205da1ea" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7edfa71 elementor-widget elementor-widget-image" data-id="7edfa71" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/maca-peruana-vermelha-amarela-preta.jpg.webp 462w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/maca-peruana-vermelha-amarela-preta-300x277.jpg.webp 300w" sizes="(max-width: 462px) 100vw, 462px" type="image/webp"><img width="462" height="427" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20462%20427'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta.jpg 462w, https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta-300x277.jpg 300w" data-lazy-sizes="(max-width: 462px) 100vw, 462px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta.jpg"><noscript><img width="462" height="427" src="https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta.jpg" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta.jpg 462w, https://macanegracomboro.net/wp-content/uploads/2022/01/maca-peruana-vermelha-amarela-preta-300x277.jpg 300w" sizes="(max-width: 462px) 100vw, 462px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-580ade50 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="580ade50" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-21148e93" data-id="21148e93" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-25dd2ca8 elementor-widget elementor-widget-heading" data-id="25dd2ca8" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Conheça as Vantagens e benefícios do <span style="color:#20A767">Maca negra <b><i>com boro</i></b></span> </h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-6eed9734 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6eed9734" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-73281981" data-id="73281981" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-75feca64 elementor-widget elementor-widget-image" data-id="75feca64" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/gel-2.png.webp" type="image/webp"><img width="130" height="130" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20130%20130'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-2.png"><noscript><img width="130" height="130" src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-2.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-32fd6208 elementor-widget elementor-widget-heading" data-id="32fd6208" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>TENHA TOTAL CONTROLE DA SUA EREÇÃO E ENERGIA EXTRA NA HORA DO SEXO</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-1e4d7acb" data-id="1e4d7acb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-4a580b54 elementor-widget elementor-widget-image" data-id="4a580b54" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/gel-1.png.webp" type="image/webp"><img width="130" height="130" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20130%20130'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-1.png"><noscript><img width="130" height="130" src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-1.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-2eb364fa elementor-widget elementor-widget-heading" data-id="2eb364fa" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>AUMENTO DO DESEMPENHO SEXUAL E mais prazer</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-2d06b4db" data-id="2d06b4db" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7e5bb1d6 elementor-widget elementor-widget-image" data-id="7e5bb1d6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/ico_feature_3.png.webp" type="image/webp"><img width="84" height="113" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2084%20113'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_3.png"><noscript><img width="84" height="113" src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_3.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-44a91743 elementor-widget elementor-widget-heading" data-id="44a91743" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>Ganho de massa muscular e dureza do pênis</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-5dcb3b2f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5dcb3b2f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-484ff9a4" data-id="484ff9a4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-51e5b305 elementor-widget elementor-widget-image" data-id="51e5b305" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/ico_feature_2.png.webp" type="image/webp"><img width="81" height="113" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2081%20113'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_2.png"><noscript><img width="81" height="113" src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_2.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-378c3ab0 elementor-widget elementor-widget-heading" data-id="378c3ab0" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>VIRILIDADE A MIL, desejo sexual mais intenso</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-5b191aac" data-id="5b191aac" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-28be58cb elementor-widget elementor-widget-image" data-id="28be58cb" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/ico_feature_1.png.webp" type="image/webp"><img width="105" height="113" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20105%20113'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_1.png"><noscript><img width="105" height="113" src="https://macanegracomboro.net/wp-content/uploads/2022/01/ico_feature_1.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-58462881 elementor-widget elementor-widget-heading" data-id="58462881" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>CHEIO DE DISPOSIÇÃO</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-539ed977" data-id="539ed977" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2bbddd17 elementor-widget elementor-widget-image" data-id="2bbddd17" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/gel-3.png.webp" type="image/webp"><img width="130" height="130" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20130%20130'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-3.png"><noscript><img width="130" height="130" src="https://macanegracomboro.net/wp-content/uploads/2022/01/gel-3.png" class="attachment-full size-full webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-fc10cee elementor-widget elementor-widget-heading" data-id="fc10cee" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><b>ORGASMOS MAIS POTENTES E COM MAIOR TEMPO DE DURAÇÃO</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6737a9a5 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6737a9a5" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7122960e" data-id="7122960e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-152cbfe5 elementor-widget elementor-widget-heading" data-id="152cbfe5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">FÓRMULA REVOLUCIONÁRIA </h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-2a9ebec7 elementor-widget elementor-widget-heading" data-id="2a9ebec7" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><span style="color:#20A767">PALAVRAS DOs ESPECIALISTAs</span></h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-62ead92f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="62ead92f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6ccb1c7" data-id="6ccb1c7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2795915b elementor-widget elementor-widget-heading" data-id="2795915b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">A fórmula do maca negra com Boro comprovadamente se mostrou O MELHOR produto que auxilia na resistência a fadiga, restaura a energia e melhora a capacidade sexual.</p>		</div>
+				</div>
+				<div class="elementor-element elementor-element-589d8bbb elementor-widget elementor-widget-heading" data-id="589d8bbb" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">MELHORARA COMPLETAMENTE A IMPOTÊNCIA E EJACULAÇÃO PRECOCE.</p>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2613ad8a" data-id="2613ad8a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7a14f07b elementor-widget elementor-widget-image" data-id="7a14f07b" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/macanegra-doutor-1-min.png.webp 974w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/macanegra-doutor-1-min-300x245.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/macanegra-doutor-1-min-768x627.png.webp 768w" sizes="(max-width: 800px) 100vw, 800px" type="image/webp"><img width="800" height="653" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20653'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min.png 974w, https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min-300x245.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min-768x627.png 768w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min.png"><noscript><img width="800" height="653" src="https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min.png 974w, https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min-300x245.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/macanegra-doutor-1-min-768x627.png 768w" sizes="(max-width: 800px) 100vw, 800px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-159d76f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="159d76f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6f5720a9" data-id="6f5720a9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-74de8d79 elementor-widget elementor-widget-heading" data-id="74de8d79" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">CONHEÇA OS  INGREDIENTEs</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-7fd1c967 elementor-widget elementor-widget-heading" data-id="7fd1c967" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><span style="color:#20A767">maca negra <i><b>com boro</b></i></span></h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-1b0940b7 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1b0940b7" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-5e8a75ca" data-id="5e8a75ca" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3502e633 elementor-headline--style-highlight elementor-widget elementor-widget-animated-headline" data-id="3502e633" data-element_type="widget" data-settings="{&quot;highlighted_text&quot;:&quot;BORO&quot;,&quot;headline_style&quot;:&quot;highlight&quot;,&quot;marker&quot;:&quot;circle&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;highlight_animation_duration&quot;:1200,&quot;highlight_iteration_delay&quot;:8000}" data-widget_type="animated-headline.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-headline">
+					<span class="elementor-headline-plain-text elementor-headline-text-wrapper">Conheça o </span>
+				<span class="elementor-headline-dynamic-wrapper elementor-headline-text-wrapper">
+					<span class="elementor-headline-dynamic-text elementor-headline-text-active">BORO</span>
+				</span>
+				</h3>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-698ad542 elementor-widget elementor-widget-image" data-id="698ad542" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/boro7-min-removebg-preview.png.webp 586w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/boro7-min-removebg-preview-300x218.png.webp 300w" sizes="(max-width: 586px) 100vw, 586px" type="image/webp"><img width="586" height="426" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20586%20426'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview.png 586w, https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview-300x218.png 300w" data-lazy-sizes="(max-width: 586px) 100vw, 586px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview.png"><noscript><img width="586" height="426" src="https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview.png 586w, https://macanegracomboro.net/wp-content/uploads/2022/01/boro7-min-removebg-preview-300x218.png 300w" sizes="(max-width: 586px) 100vw, 586px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-32fe24cb" data-id="32fe24cb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-29986a1c elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="29986a1c" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Aumenta a quantidade de estrogênio e testosterona</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Alivia sintomas da menopausa</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Previne a artrite</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Reduz a serveridade da artrite reumatóide</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Usado para musculação</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Ajuda na saúde óssea</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Essencial para a reprodução e o desenvolvimento do feto</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Previne osteoporose pós-menopausa</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Previne coágulos sanguíneos</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Aliviar as dificuldades causadas pela insuficiência cardíaca</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-695abbc3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="695abbc3" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2d91228c" data-id="2d91228c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6adbde2 elementor-headline--style-highlight elementor-widget elementor-widget-animated-headline" data-id="6adbde2" data-element_type="widget" data-settings="{&quot;highlighted_text&quot;:&quot;Superior&quot;,&quot;headline_style&quot;:&quot;highlight&quot;,&quot;marker&quot;:&quot;circle&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;highlight_animation_duration&quot;:1200,&quot;highlight_iteration_delay&quot;:8000}" data-widget_type="animated-headline.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-headline">
+					<span class="elementor-headline-plain-text elementor-headline-text-wrapper">A Maca Negra é</span>
+				<span class="elementor-headline-dynamic-wrapper elementor-headline-text-wrapper">
+					<span class="elementor-headline-dynamic-text elementor-headline-text-active">Superior</span>
+				</span>
+				</h3>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-25349f14 elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-image" data-id="25349f14" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png.webp 602w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png.webp 300w" sizes="(max-width: 602px) 100vw, 602px" type="image/webp"><img width="602" height="414" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20602%20414'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png 602w, https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png 300w" data-lazy-sizes="(max-width: 602px) 100vw, 602px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png"><noscript><img width="602" height="414" src="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png 602w, https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png 300w" sizes="(max-width: 602px) 100vw, 602px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-61c87735 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="61c87735" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Pré-Treino</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Ganho de Massa Muscular</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Libido/Desejo</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Fertilidade</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Disfunção Erétil</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Andropausa</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Saúde da Próstata</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6b6d61ee" data-id="6b6d61ee" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-428f569c elementor-hidden-mobile elementor-widget elementor-widget-image" data-id="428f569c" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png.webp 602w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png.webp 300w" sizes="(max-width: 602px) 100vw, 602px" type="image/webp"><img width="602" height="414" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20602%20414'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png 602w, https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png 300w" data-lazy-sizes="(max-width: 602px) 100vw, 602px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png"><noscript><img width="602" height="414" src="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview.png 602w, https://macanegracomboro.net/wp-content/uploads/2022/01/kisspng-maca-peruvian-cuisine-superfood-vegetarian-cuisine-maca-5b271e303e71f1.0214059915292902882558-removebg-preview-300x206.png 300w" sizes="(max-width: 602px) 100vw, 602px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<div class="elementor-element elementor-element-3a00fafe elementor-widget elementor-widget-heading" data-id="3a00fafe" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">ENTENDA PORQUE maca negra com boro FUNCIONA</h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-6e5538a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6e5538a" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7d033844" data-id="7d033844" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-29fc3db8 elementor-widget elementor-widget-image" data-id="29fc3db8" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/pq_funciona-1.png.webp 399w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/pq_funciona-1-300x298.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/pq_funciona-1-150x150.png.webp 150w" sizes="(max-width: 399px) 100vw, 399px" type="image/webp"><img width="399" height="396" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20399%20396'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1.png 399w, https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1-300x298.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1-150x150.png 150w" data-lazy-sizes="(max-width: 399px) 100vw, 399px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1.png"><noscript><img width="399" height="396" src="https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1.png 399w, https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1-300x298.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/pq_funciona-1-150x150.png 150w" sizes="(max-width: 399px) 100vw, 399px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-220de608 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="220de608" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-76a44769" data-id="76a44769" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-43ece209 elementor-widget elementor-widget-text-editor" data-id="43ece209" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>&nbsp;Saúde dos corpos<br>
+cavernosos</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-631042ec elementor-widget elementor-widget-heading" data-id="631042ec" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">As cápsulas agem diretamente nos corpos cavernosos, aumentando a capacidade de expansão do tecido. Com a expansão otimizada dos corpos cavernosos&nbsp;as ereções duram mais e podem ser mantidas por muito mais tempo, sem riscos.</h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-4759fc54" data-id="4759fc54" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-554d5c5a elementor-widget elementor-widget-text-editor" data-id="554d5c5a" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p> desenvolvimento muscular</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-1e38582a elementor-widget elementor-widget-heading" data-id="1e38582a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Boro é Usado para musculação: o boro é capaz de aumentar a taxa de testosterona nos homens. Ainda que muitos levantadores de peso prefiram tomar suplementos à base do mineral para aumentar seus níveis de testosterona, não existe evidência concreta ou explicação para esse mecanismo.</h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-5f3daf25" data-id="5f3daf25" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-624bade5 elementor-widget elementor-widget-text-editor" data-id="624bade5" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p> Equilíbrio hormonal</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-6d15d069 elementor-widget elementor-widget-heading" data-id="6d15d069" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">As pílulas também aumentam a concentração de hormônio testosterona, principal responsável pelo apetite sexual masculino e com forte influência na potência das ereções e na qualidade de seus orgasmos.</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<div class="elementor-element elementor-element-35d50884 elementor-widget elementor-widget-image" data-id="35d50884" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+																<a href="#kit">
+							<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/bt-experimente.png.webp 488w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/bt-experimente-300x68.png.webp 300w" sizes="(max-width: 488px) 100vw, 488px" type="image/webp"><img width="488" height="111" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20488%20111'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png 488w, https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente-300x68.png 300w" data-lazy-sizes="(max-width: 488px) 100vw, 488px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png"><noscript><img width="488" height="111" src="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente.png 488w, https://macanegracomboro.net/wp-content/uploads/2022/01/bt-experimente-300x68.png 300w" sizes="(max-width: 488px) 100vw, 488px"></noscript></picture>								</a>
+															</div>
+				</div>
+				<div class="elementor-element elementor-element-321dccbc elementor-widget elementor-widget-image" data-id="321dccbc" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/Compra-segura-monetize-300x61-1.png.webp" type="image/webp"><img width="300" height="61" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2061'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/Compra-segura-monetize-300x61-1.png"><noscript><img width="300" height="61" src="https://macanegracomboro.net/wp-content/uploads/2022/01/Compra-segura-monetize-300x61-1.png" class="attachment-large size-large webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-2553f300 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2553f300" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-781d02b0" data-id="781d02b0" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3b84e858 elementor-widget elementor-widget-heading" data-id="3b84e858" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">A fórmula inovadora do <span style="color:#20A767">maca negra <b><i>com boro</i></b></span> é destaque na mídia! </h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-7eec8000 elementor-widget elementor-widget-heading" data-id="7eec8000" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Os<b> principais sites do país</b> atestam a composição do Maca negra com boro. </h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-5de88330 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5de88330" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-35fb876d" data-id="35fb876d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6ec37b46 elementor-widget elementor-widget-image" data-id="6ec37b46" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-record-iron.png.webp 179w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-record-iron-150x150.png.webp 150w" sizes="(max-width: 179px) 100vw, 179px" type="image/webp"><img width="179" height="179" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20179%20179'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron-150x150.png 150w" data-lazy-sizes="(max-width: 179px) 100vw, 179px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron.png"><noscript><img width="179" height="179" src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-record-iron-150x150.png 150w" sizes="(max-width: 179px) 100vw, 179px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-2e402799 elementor-widget elementor-widget-heading" data-id="2e402799" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">"Fortalece o sistema imunológico, melhorar o estado de sub-saúde Os alcalóides da Maca Negra têm a função de doenças antibacterianas, antivirais, anti-coagulantes, analgésicas, anti-inflamatórias, antitumorais e anti-cardiovasculares. A nutrição abrangente e equilibrada e os materiais ativos únicos da Maca podem efetivamente fortalecer o sistema imunológico e melhorar o estado de sub-saúde."</h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-277300a7" data-id="277300a7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-595ba7e2 elementor-widget elementor-widget-image" data-id="595ba7e2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-sbt-iron.png.webp 179w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-sbt-iron-150x150.png.webp 150w" sizes="(max-width: 179px) 100vw, 179px" type="image/webp"><img width="179" height="179" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20179%20179'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron-150x150.png 150w" data-lazy-sizes="(max-width: 179px) 100vw, 179px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron.png"><noscript><img width="179" height="179" src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-sbt-iron-150x150.png 150w" sizes="(max-width: 179px) 100vw, 179px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-10399149 elementor-widget elementor-widget-heading" data-id="10399149" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">"Melhora a atividade sexual e a fertilidade. A Maca Negra pode ajustar o hipotálamo humano e a secreção de hormônios (como testosterona, DHEA, hormônios femininos, hormônio progestacional) ao nível normal. Assim, pode melhorar a disfunção sexual, aumentar a contagem de espermatozóides masculinos, ativar a motilidade espermática, melhorar a fertilidade </h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-21625237" data-id="21625237" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-4c042dcc elementor-widget elementor-widget-image" data-id="4c042dcc" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-g1.png.webp 179w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/midia-g1-150x150.png.webp 150w" sizes="(max-width: 179px) 100vw, 179px" type="image/webp"><img width="179" height="179" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20179%20179'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1-150x150.png 150w" data-lazy-sizes="(max-width: 179px) 100vw, 179px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1.png"><noscript><img width="179" height="179" src="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1.png 179w, https://macanegracomboro.net/wp-content/uploads/2022/01/midia-g1-150x150.png 150w" sizes="(max-width: 179px) 100vw, 179px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-6e3db951 elementor-widget elementor-widget-heading" data-id="6e3db951" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">"Melhora a capacidade de exercício do músculo: A maca negra contém um equilíbrio de nutrientes e ingredientes ativos, o que pode aumentar a resistência e a força muscular e também reduzir significativamente a degradação muscular e a anemia esportiva. A Maca Negra comprovadamente se mostrou um produto que auxilia na resistencia a fatiga, restaura a energia e melhora a capacidade sexual."</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-77c3e1d5 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="77c3e1d5" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5f6e8329" data-id="5f6e8329" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-11b174f5 elementor-widget elementor-widget-heading" data-id="11b174f5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Não perca essa oportunidade</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-34553f84 elementor-widget elementor-widget-image" data-id="34553f84" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/colhendomacaperuana-min.png.webp 453w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/colhendomacaperuana-min-221x300.png.webp 221w" sizes="(max-width: 453px) 100vw, 453px" type="image/webp"><img width="453" height="615" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20453%20615'%3E%3C/svg%3E" class="attachment-full size-full webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min.png 453w, https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min-221x300.png 221w" data-lazy-sizes="(max-width: 453px) 100vw, 453px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min.png"><noscript><img width="453" height="615" src="https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min.png" class="attachment-full size-full webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min.png 453w, https://macanegracomboro.net/wp-content/uploads/2022/01/colhendomacaperuana-min-221x300.png 221w" sizes="(max-width: 453px) 100vw, 453px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-239f7071 elementor-widget elementor-widget-heading" data-id="239f7071" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Tratamento indicado para ter uma facilidade na ereção, pênis sempre duro, sem oscilações, um controle maior de ejaculação, e ver o pênis bem maior e grosso.</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-3ab6399e elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3ab6399e" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-38e5d8f2" data-id="38e5d8f2" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-27c78c77 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="27c78c77" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7b86e090" data-id="7b86e090" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-769560ed elementor-widget elementor-widget-heading" data-id="769560ed" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">ESCOLHA ABAIXO O SEU KIT</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-583ef98f elementor-widget elementor-widget-menu-anchor" data-id="583ef98f" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+body.elementor-page .elementor-widget-menu-anchor{margin-bottom:0}</style>		<div id="kit" class="elementor-menu-anchor"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-52f3709a elementor-widget elementor-widget-heading" data-id="52f3709a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">Aproveite, essa super promoção</p>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-27115f21 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="27115f21" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-5c333fd7 elementor-invisible" data-id="5c333fd7" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;zoomIn&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-534bf60b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="534bf60b" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-44bf361f" data-id="44bf361f" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-1dfb2029 elementor-widget elementor-widget-heading" data-id="1dfb2029" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">COMPRE 3 POTES</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3c574c24 elementor-widget elementor-widget-heading" data-id="3c574c24" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">TRATAMENTO PARA 3 MÊS
+						</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-538d930d elementor-align-right elementor-widget elementor-widget-button" data-id="538d930d" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"><b>23% </b><br><span style="font-size: 14px">OFF</span></span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-f59bf92 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f59bf92" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-110b4205" data-id="110b4205" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-dc691a1 elementor-widget elementor-widget-image" data-id="dc691a1" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png.png.webp 600w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-300x300.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-150x150.png.webp 150w" sizes="(max-width: 600px) 100vw, 600px" type="image/webp"><img width="600" height="600" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20600'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-150x150.png 150w" data-lazy-sizes="(max-width: 600px) 100vw, 600px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png.png"><noscript><img width="600" height="600" src="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom3-MacaBoro600x600-min.png-150x150.png 150w" sizes="(max-width: 600px) 100vw, 600px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-4e451b88 elementor-widget elementor-widget-heading" data-id="4e451b88" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">DE <b><span style="color:#FF0000"><strike>R$297,00</strike></span></b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5783345d elementor-widget elementor-widget-heading" data-id="5783345d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Por Apenas  <b>12X</b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-62fde75e elementor-widget elementor-widget-heading" data-id="62fde75e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">R$ <span style="font-size: 60px; vertical-align: sub;">22</span>,79</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3a4cd691 elementor-widget elementor-widget-heading" data-id="3a4cd691" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Ou <b>R$227,00</b> à Vísta</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-23d012bc elementor-align-center elementor-widget elementor-widget-button" data-id="23d012bc" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://app.monetizze.com.br/checkout/KTD226124" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"> 						COMPRAR AGORA! 					</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-76c2d632 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="76c2d632" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-28fadb19" data-id="28fadb19" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-51a1f3e6 elementor-widget elementor-widget-image" data-id="51a1f3e6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="50" height="31" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2050%2031'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" /><noscript><img width="50" height="31" src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" class="attachment-large size-large" alt="" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-30b81357" data-id="30b81357" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6219ad62 elementor-widget elementor-widget-heading" data-id="6219ad62" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">FRETE  PARA TODO BRASIL
+					</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2bce77e3 elementor-invisible" data-id="2bce77e3" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;zoomIn&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-766cc9dc elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="766cc9dc" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-282e5a19" data-id="282e5a19" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-57f5461f elementor-widget elementor-widget-heading" data-id="57f5461f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">COMPRE 5 POTES</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-7fd1f58a elementor-widget elementor-widget-heading" data-id="7fd1f58a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">TRATAMENTO PARA 5 MÊS
+						</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-caa7564 elementor-align-right elementor-widget elementor-widget-button" data-id="caa7564" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"><b>30% </b><br><span style="font-size: 14px">OFF</span></span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4071240d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4071240d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7286f4cb" data-id="7286f4cb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2c87c92f elementor-widget elementor-widget-image" data-id="2c87c92f" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png.png.webp 600w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-300x300.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-150x150.png.webp 150w" sizes="(max-width: 600px) 100vw, 600px" type="image/webp"><img width="600" height="600" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20600'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-150x150.png 150w" data-lazy-sizes="(max-width: 600px) 100vw, 600px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png.png"><noscript><img width="600" height="600" src="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/Kitcom5-MacaBoro600x600-min.png-150x150.png 150w" sizes="(max-width: 600px) 100vw, 600px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-57d40d66 elementor-widget elementor-widget-heading" data-id="57d40d66" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">DE <b><span style="color:#FF0000"><strike>R$497,00</strike></span></b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-59c91ed9 elementor-widget elementor-widget-heading" data-id="59c91ed9" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Por Apenas  <b>12X</b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-366735f5 elementor-widget elementor-widget-heading" data-id="366735f5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">R$ <span style="font-size: 60px; vertical-align: sub;">34</span>,84</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-6131c0d9 elementor-widget elementor-widget-heading" data-id="6131c0d9" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Ou <b>R$347,00</b> à Vísta</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-40e12092 elementor-align-center elementor-widget elementor-widget-button" data-id="40e12092" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://app.monetizze.com.br/checkout/KZF226125" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"> 						COMPRAR AGORA! 					</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-515dc437 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="515dc437" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-39147aac" data-id="39147aac" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-37812034 elementor-widget elementor-widget-image" data-id="37812034" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="50" height="31" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2050%2031'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" /><noscript><img width="50" height="31" src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" class="attachment-large size-large" alt="" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-1c47981" data-id="1c47981" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2b705757 elementor-widget elementor-widget-heading" data-id="2b705757" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">FRETE  PARA TODO BRASIL
+					</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6815b9f8 elementor-invisible" data-id="6815b9f8" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;zoomIn&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-466a8939 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="466a8939" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-485fec3c" data-id="485fec3c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-36583bb7 elementor-widget elementor-widget-heading" data-id="36583bb7" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">COMPRE 1 POTE</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-1af28830 elementor-widget elementor-widget-heading" data-id="1af28830" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">TRATAMENTO PARA 1 MÊS
+						</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5394d2a1 elementor-align-right elementor-widget elementor-widget-button" data-id="5394d2a1" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"><b>45% </b><br><span style="font-size: 14px">OFF</span></span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-48052262 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="48052262" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-2c99aea3" data-id="2c99aea3" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-14932b94 elementor-widget elementor-widget-image" data-id="14932b94" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/MacaBoro1Pote-600x600-min.png.png.webp 600w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/MacaBoro1Pote-600x600-min.png-300x300.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/02/MacaBoro1Pote-600x600-min.png-150x150.png.webp 150w" sizes="(max-width: 600px) 100vw, 600px" type="image/webp"><img width="600" height="600" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20600'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png-150x150.png 150w" data-lazy-sizes="(max-width: 600px) 100vw, 600px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png.png"><noscript><img width="600" height="600" src="https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png.png 600w, https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png-300x300.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/02/MacaBoro1Pote-600x600-min.png-150x150.png 150w" sizes="(max-width: 600px) 100vw, 600px"></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-73e8f297 elementor-widget elementor-widget-heading" data-id="73e8f297" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">DE <b><span style="color:#FF0000"><strike>R$177,00</strike></span></b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-1683107c elementor-widget elementor-widget-heading" data-id="1683107c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Por Apenas  <b>12X</b></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5edf64fd elementor-widget elementor-widget-heading" data-id="5edf64fd" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">R$ <span style="font-size: 60px; vertical-align: sub;">9</span>,74</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-78cdff6a elementor-widget elementor-widget-heading" data-id="78cdff6a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Ou <b>R$97,00</b> à Vísta</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-20dca2ed elementor-align-center elementor-widget elementor-widget-button" data-id="20dca2ed" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://app.monetizze.com.br/checkout/KFU226120" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text"> 						COMPRAR AGORA! 					</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-1311eaef elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1311eaef" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-13df1068" data-id="13df1068" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-48f219df elementor-widget elementor-widget-image" data-id="48f219df" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="50" height="31" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2050%2031'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" /><noscript><img width="50" height="31" src="https://macanegracomboro.net/wp-content/uploads/2022/02/entrega.png" class="attachment-large size-large" alt="" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3d86f8d1" data-id="3d86f8d1" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-e90babb elementor-widget elementor-widget-heading" data-id="e90babb" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">FRETE  PARA TODO BRASIL
+					</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-622eb577 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="622eb577" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-67eb00b5" data-id="67eb00b5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-484abb44 elementor-widget elementor-widget-heading" data-id="484abb44" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">QUEM EXPERIMENTOU<span style="color:#20A767"> maca negra </span><br><span style="color:#20A767"><i><b>com boro</b></i></span> RECOMENDA </h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-611ed508 elementor-widget elementor-widget-heading" data-id="611ed508" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">Depoimentos de pessoas reais que já usaram maca negra com boro </p>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-271ed3dd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="271ed3dd" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-679e615e" data-id="679e615e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-e8f0569 elementor-testimonial--skin-bubble elementor-testimonial--align-left elementor-testimonial--layout-image_inline elementor-pagination-type-bullets elementor-widget elementor-widget-testimonial-carousel" data-id="e8f0569" data-element_type="widget" data-settings="{&quot;space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:28,&quot;sizes&quot;:[]},&quot;slides_per_view&quot;:&quot;3&quot;,&quot;space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:9,&quot;sizes&quot;:[]},&quot;pagination&quot;:&quot;bullets&quot;,&quot;speed&quot;:500,&quot;space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]}}" data-widget_type="testimonial-carousel.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-swiper">
+			<div class="elementor-main-swiper swiper-container">
+				<div class="swiper-wrapper">
+											<div class="swiper-slide">
+									<div class="elementor-testimonial">
+							<div class="elementor-testimonial__content">
+					<div class="elementor-testimonial__text">
+						Eu sempre tive problemas com ereção. Sempre pensei que fosse algo da minha cabeça. Procurei psicólogos, terapeutas e até médicos que tratassem da saúde masculina. Só o Maca Negra resolveu! Ele me dá aquele impulso sexual com uma ereção forte e duradoura! O Maca Negra ajuda de verdade!”					</div>
+									</div>
+						<div class="elementor-testimonial__footer">
+									<div class="elementor-testimonial__image">
+						<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/23-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg.webp" type="image/webp"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Rodrigo" class="webpexpress-processed" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/23-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg"><noscript><img src="https://macanegracomboro.net/wp-content/uploads/2022/01/23-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg" alt="Rodrigo" class="webpexpress-processed"></noscript></picture>
+					</div>
+								<cite class="elementor-testimonial__cite"><span class="elementor-testimonial__name">Rodrigo</span></cite>			</div>
+		</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-testimonial">
+							<div class="elementor-testimonial__content">
+					<div class="elementor-testimonial__text">
+						Já estava cansado de dar as mesmas desculpas. ‘Hoje não estou no clima’, ‘dor de cabeça’, etc… Até que tentei Maca Negra ! Aquela monotonia, baixo interesse em sexo e cansaço passaram! Agora faço sexo todos os dias.					</div>
+									</div>
+						<div class="elementor-testimonial__footer">
+									<div class="elementor-testimonial__image">
+						<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/image_preview.jpg.webp" type="image/webp"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Rafael" class="webpexpress-processed" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/image_preview.jpg"><noscript><img src="https://macanegracomboro.net/wp-content/uploads/2022/01/image_preview.jpg" alt="Rafael" class="webpexpress-processed"></noscript></picture>
+					</div>
+								<cite class="elementor-testimonial__cite"><span class="elementor-testimonial__name">Rafael</span></cite>			</div>
+		</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-testimonial">
+							<div class="elementor-testimonial__content">
+					<div class="elementor-testimonial__text">
+						Maca Negra não discrimina. Um dos meus amigos héteros me contou a respeito e eu tive que experimentar. Dito e feito! O Maca Negra com Boro me deu a virilidade que eu estava precisando ter na cama. É só seguir as recomendações que não tem erro.					</div>
+									</div>
+						<div class="elementor-testimonial__footer">
+									<div class="elementor-testimonial__image">
+						<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/26-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg.webp" type="image/webp"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Roberto" class="webpexpress-processed" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/26-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg"><noscript><img src="https://macanegracomboro.net/wp-content/uploads/2022/01/26-p7ost7yooirus1gx5vsumcz6bm3qhatjlhmg2tqsd0.jpg" alt="Roberto" class="webpexpress-processed"></noscript></picture>
+					</div>
+								<cite class="elementor-testimonial__cite"><span class="elementor-testimonial__name">Roberto</span></cite>			</div>
+		</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-testimonial">
+							<div class="elementor-testimonial__content">
+					<div class="elementor-testimonial__text">
+						Sempre que meus amigos me chamavam pra baladas, era a mesma preocupação – ‘se eu parar num motel com alguma mulher, não vai subir do jeito que deveria’. Hoje, porem, Maca Negra com Boro me dá o empurrãozinho que eu precisava pra ereções potentes!					</div>
+									</div>
+						<div class="elementor-testimonial__footer">
+									<div class="elementor-testimonial__image">
+						<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/21.jpg.webp" type="image/webp"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Manoel" class="webpexpress-processed" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/21.jpg"><noscript><img src="https://macanegracomboro.net/wp-content/uploads/2022/01/21.jpg" alt="Manoel" class="webpexpress-processed"></noscript></picture>
+					</div>
+								<cite class="elementor-testimonial__cite"><span class="elementor-testimonial__name">Manoel</span></cite>			</div>
+		</div>
+								</div>
+									</div>
+															<div class="swiper-pagination"></div>
+																	</div>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-32acc7ed elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="32acc7ed" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-732d690c" data-id="732d690c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-3a0988a8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3a0988a8" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-1323e207" data-id="1323e207" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-606e7819 elementor-widget elementor-widget-heading" data-id="606e7819" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Garantimos os resultados do <span style="color:#20A767">maca negra <i><b>com boro</b></i>!</span></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-297b2175 elementor-widget elementor-widget-heading" data-id="297b2175" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Garantia de resultados ou seu dinheiro de volta!*<br><br>
+
+Sabemos que oferecemos um produto eficaz e superior. Nossa fórmula é inovadora, e a mais potente do mercado. Confiamos tanto em nossa fórmula que podemos fazer essa garantia:<br><br>
+
+Se você não estiver satisfeito com os resultados da MACA NEGRA com boro em 7 dias de tratamento, reembolsamos 100% do seu dinheiro!</h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-4d698d61" data-id="4d698d61" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-435e12e1 elementor-widget elementor-widget-image" data-id="435e12e1" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/risco.png.webp 1000w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/risco-300x244.png.webp 300w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/risco-768x624.png.webp 768w" sizes="(max-width: 800px) 100vw, 800px" type="image/webp"><img width="800" height="650" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20650'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/risco.png 1000w, https://macanegracomboro.net/wp-content/uploads/2022/01/risco-300x244.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/risco-768x624.png 768w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/risco.png"><noscript><img width="800" height="650" src="https://macanegracomboro.net/wp-content/uploads/2022/01/risco.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/risco.png 1000w, https://macanegracomboro.net/wp-content/uploads/2022/01/risco-300x244.png 300w, https://macanegracomboro.net/wp-content/uploads/2022/01/risco-768x624.png 768w" sizes="(max-width: 800px) 100vw, 800px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-5f1e04ec elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5f1e04ec" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5c5bb897" data-id="5c5bb897" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7f51b26a elementor-widget elementor-widget-heading" data-id="7f51b26a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">AINDA COM <span style="color:#20A767">DÚVIDAS? </span></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-1187ef0e elementor-widget elementor-widget-heading" data-id="1187ef0e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Separamos os questionamentos mais comuns para que você sinta total confiança <br>na hora de adquirir o maca negra com boro</h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-2b62ca53 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2b62ca53" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-7a6f0bad" data-id="7a6f0bad" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-4ff10cb5 elementor-widget elementor-widget-toggle" data-id="4ff10cb5" data-element_type="widget" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.elementor-toggle{text-align:left}.elementor-toggle .elementor-tab-title{font-weight:700;line-height:1;margin:0;padding:15px;border-bottom:1px solid #d4d4d4;cursor:pointer;outline:none}.elementor-toggle .elementor-tab-title .elementor-toggle-icon{display:inline-block;width:1em}.elementor-toggle .elementor-tab-title .elementor-toggle-icon svg{-webkit-margin-start:-5px;margin-inline-start:-5px;width:1em;height:1em}.elementor-toggle .elementor-tab-title .elementor-toggle-icon.elementor-toggle-icon-right{float:right;text-align:right}.elementor-toggle .elementor-tab-title .elementor-toggle-icon.elementor-toggle-icon-left{float:left;text-align:left}.elementor-toggle .elementor-tab-title .elementor-toggle-icon .elementor-toggle-icon-closed{display:block}.elementor-toggle .elementor-tab-title .elementor-toggle-icon .elementor-toggle-icon-opened{display:none}.elementor-toggle .elementor-tab-title.elementor-active{border-bottom:none}.elementor-toggle .elementor-tab-title.elementor-active .elementor-toggle-icon-closed{display:none}.elementor-toggle .elementor-tab-title.elementor-active .elementor-toggle-icon-opened{display:block}.elementor-toggle .elementor-tab-content{padding:15px;border-bottom:1px solid #d4d4d4;display:none}@media (max-width:767px){.elementor-toggle .elementor-tab-title{padding:12px}.elementor-toggle .elementor-tab-content{padding:12px 10px}}</style>		<div class="elementor-toggle" role="tablist">
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-1341" class="elementor-tab-title" data-tab="1" role="tab" aria-controls="elementor-tab-content-1341" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-minus"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">O QUE É O maca negra com boro?</a>
+					</h3>
+
+					<div id="elementor-tab-content-1341" class="elementor-tab-content elementor-clearfix" data-tab="1" role="tabpanel" aria-labelledby="elementor-tab-title-1341"><p>Maca Negra com Boro é um suplemento 100% natural, aprovado pela ANVISA e sem contra indicações que aumenta o apetite sexual, deixa suas ereções mais rígidas e firmes, controle total de ejaculação, faz você ejacular com mais pressão e volume, aumenta e engrossa o pênis.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-1342" class="elementor-tab-title" data-tab="2" role="tab" aria-controls="elementor-tab-content-1342" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-minus"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">COMO FUNCIONA O Maca Negra com boro?</a>
+					</h3>
+
+					<div id="elementor-tab-content-1342" class="elementor-tab-content elementor-clearfix" data-tab="2" role="tabpanel" aria-labelledby="elementor-tab-title-1342"><p>O Maca Negra Com Boro promove a saúde dos corpos cavernosos para que sejam mais elásticos e armazenem mais sangue, além de aumentar o fluxo de sangue para o pênis. Com isso, você tem ereções mais potentes, duradouras e maiores e orgasmos mais fortes. Além disso, o Tribulus dá energia para aproveitar sua potência sexual turbinada!</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-1343" class="elementor-tab-title" data-tab="3" role="tab" aria-controls="elementor-tab-content-1343" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-minus"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">EXISTEM EFEITOS COLATERAIS COM O USO DO maca negra com boro?</a>
+					</h3>
+
+					<div id="elementor-tab-content-1343" class="elementor-tab-content elementor-clearfix" data-tab="3" role="tabpanel" aria-labelledby="elementor-tab-title-1343"><p>Não existe nenhum efeito colateral com o consumo do produto, e qualquer pessoa pode tomar e aproveitar seus benefícios. Entretanto, gestantes, nutrizes, crianças e pessoas com algum tipo de enfermidade ou que fazem uso contínuo de algum medicamento devem consultar um médico antes de iniciar o consumo. Este produto NÃO CONTÉM GLÚTEN.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-1344" class="elementor-tab-title" data-tab="4" role="tab" aria-controls="elementor-tab-content-1344" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-minus"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">COMO EU DEVO USAR maca negra com boro?</a>
+					</h3>
+
+					<div id="elementor-tab-content-1344" class="elementor-tab-content elementor-clearfix" data-tab="4" role="tabpanel" aria-labelledby="elementor-tab-title-1344"><p>Para obter ótimos resultados com o uso da Maca Negra com Boro, recomenda-se 2 a 4 cápsulas ao dia, no almoço e outra no jantar, 10 minutos antes de preferência com água.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-1345" class="elementor-tab-title" data-tab="5" role="tab" aria-controls="elementor-tab-content-1345" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-minus"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">POR QUANTO TEMPO EU DEVO TOMAR O maca negra com boro?</a>
+					</h3>
+
+					<div id="elementor-tab-content-1345" class="elementor-tab-content elementor-clearfix" data-tab="5" role="tabpanel" aria-labelledby="elementor-tab-title-1345"><p>Recomenda-se o uso de 5 meses do produto para sentir ótimos resultados e ter um bom crescimentos no pênis, controlar a ejaculação e ter ereções por horas.</p></div>
+				</div>
+								</div>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-167c55d3" data-id="167c55d3" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-1ddbb600 elementor-widget elementor-widget-toggle" data-id="1ddbb600" data-element_type="widget" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-toggle" role="tablist">
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-5001" class="elementor-tab-title" data-tab="1" role="tab" aria-controls="elementor-tab-content-5001" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-caret-up"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">QUAL É O PRAZO DO FRETE?</a>
+					</h3>
+
+					<div id="elementor-tab-content-5001" class="elementor-tab-content elementor-clearfix" data-tab="1" role="tabpanel" aria-labelledby="elementor-tab-title-5001"><p>O prazo médio de entrega para o Brasil é de 3 a 10 dias úteis. O produto só é enviado após a confirmação do seu pagamento pela administradora do seu cartão de crédito ou após a confirmação da liquidação do boleto.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-5002" class="elementor-tab-title" data-tab="2" role="tab" aria-controls="elementor-tab-content-5002" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-caret-up"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">A MACA NEGRA  É COMPROVADA CIENTIFICAMENTE?</a>
+					</h3>
+
+					<div id="elementor-tab-content-5002" class="elementor-tab-content elementor-clearfix" data-tab="2" role="tabpanel" aria-labelledby="elementor-tab-title-5002"><p>A Maca Peruana é uma das raizes mais estudadas no mundo. Em estudos clínicos desenvolvidos por especialistas independentes, envolvendo mais de 4000 homens tomando Maca Peruana, foi comprovado o aumento no prazer sexual, libido e energia.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-5003" class="elementor-tab-title" data-tab="3" role="tab" aria-controls="elementor-tab-content-5003" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-caret-up"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">EXISTE GARANTIA DOS RESULTADOS?</a>
+					</h3>
+
+					<div id="elementor-tab-content-5003" class="elementor-tab-content elementor-clearfix" data-tab="3" role="tabpanel" aria-labelledby="elementor-tab-title-5003"><p>Garantimos que você vai notar ereções mais potentes e duradouras, mais apetite sexual, muito mais energia e auto estima se você tomar o Tribulus todos os dias. Vale lembrar que é um produto natural, sendo que o efeito pode variar de pessoa para pessoa.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-5004" class="elementor-tab-title" data-tab="4" role="tab" aria-controls="elementor-tab-content-5004" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-caret-up"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">QUAIS SÃO OS MÉTODOS DE PAGAMENTO?</a>
+					</h3>
+
+					<div id="elementor-tab-content-5004" class="elementor-tab-content elementor-clearfix" data-tab="4" role="tabpanel" aria-labelledby="elementor-tab-title-5004"><p>Aceitamos os cartões de crédito mais usados: visa, mastercard e outros. Você também pode optar pela opção de boleto bancário.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<h3 id="elementor-tab-title-5005" class="elementor-tab-title" data-tab="5" role="tab" aria-controls="elementor-tab-content-5005" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-caret-up"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">A MACA NEGRA COM BORO PRECISA DE PRESCRIÇÃO MÉDICA?</a>
+					</h3>
+
+					<div id="elementor-tab-content-5005" class="elementor-tab-content elementor-clearfix" data-tab="5" role="tabpanel" aria-labelledby="elementor-tab-title-5005"><p>A legislação brasileira recomenda que um profissional habilitado recomende o uso do produto. Mesmo assim, lembre-se que sempre é recomendado consultar seu médico antes de tomar qualquer suplemento.</p></div>
+				</div>
+								</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-2938b77a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2938b77a" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-54a3466d" data-id="54a3466d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-5c14c338 elementor-widget elementor-widget-heading" data-id="5c14c338" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Embalagem discreta <span style="color:#20A767"> SUA PRIVACIDADE ESTÁ GARANTIDA!</span></h2>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-12e30a88 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="12e30a88" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-272bf26c" data-id="272bf26c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2286ef55 elementor-widget elementor-widget-image" data-id="2286ef55" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/pacote-discreto-iron.png.webp 633w, https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/pacote-discreto-iron-300x199.png.webp 300w" sizes="(max-width: 633px) 100vw, 633px" type="image/webp"><img width="633" height="419" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20633%20419'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron.png 633w, https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron-300x199.png 300w" data-lazy-sizes="(max-width: 633px) 100vw, 633px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron.png"><noscript><img width="633" height="419" src="https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron.png 633w, https://macanegracomboro.net/wp-content/uploads/2022/01/pacote-discreto-iron-300x199.png 300w" sizes="(max-width: 633px) 100vw, 633px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6a8f4f6a" data-id="6a8f4f6a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-37545d73 elementor-widget elementor-widget-heading" data-id="37545d73" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Todos os pedidos são embalados e despachados em EMBALAGENS DISCRETAS, envolvidas em papel pardo.<br><br>
+A embalagem não contém nehuma informação de origem ou conteúdo interno.<br><br>
+O remetente virá em nome discreto, assim como sua fatura do cartão de crédito, garantindo total discrição.<br><br>
+Você pode informar qualquer endereço para receber seu pedido, pois nem mesmo o carteiro saberá que se trata a sua encomenda.<br><br>
+<b>Sigilo Absoluto.</b></h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-464df01b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="464df01b" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-10ee1e4d" data-id="10ee1e4d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-482d7231 elementor-widget elementor-widget-heading" data-id="482d7231" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Evite falsificações e riscos.<br>
+NÃO adquira produtos sem procedência e qualidade garantidas. Não nos<br>
+responsabilizamos por compras realizadas em outros sites. ESTÁ TERMINANTEMENTE PROIBIDA<br>
+a venda do maca negra com boro no Mercado Livre, Americanas.com, Submarino, Shoptime entre outros.</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-7591c69d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7591c69d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2709a2f2" data-id="2709a2f2" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-57bc8adf elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="57bc8adf" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-3fdd661b" data-id="3fdd661b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-4b57f8b1 elementor-widget elementor-widget-heading" data-id="4b57f8b1" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">FORMAS DE PAGAMENTO</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-2ded0f95 elementor-widget elementor-widget-image" data-id="2ded0f95" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/formasdepagamento-300x124-1-1.png.webp" type="image/webp"><img width="300" height="124" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20124'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/formasdepagamento-300x124-1-1.png"><noscript><img width="300" height="124" src="https://macanegracomboro.net/wp-content/uploads/2022/01/formasdepagamento-300x124-1-1.png" class="attachment-large size-large webpexpress-processed" alt=""></noscript></picture>															</div>
+				</div>
+				<div class="elementor-element elementor-element-83e312f elementor-widget elementor-widget-heading" data-id="83e312f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">MÉTODOS DE ENTREGA</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-4a204fc2 elementor-widget elementor-widget-image" data-id="4a204fc2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<picture><source data-lazy-srcset="https://macanegracomboro.net/wp-content/webp-express/webp-images/uploads/2022/01/correios-1-1-300x124.png.webp 300w" sizes="(max-width: 311px) 100vw, 311px" type="image/webp"><img width="311" height="129" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20311%20129'%3E%3C/svg%3E" class="attachment-large size-large webpexpress-processed" alt="" data-lazy-srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1.png 311w, https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1-300x124.png 300w" data-lazy-sizes="(max-width: 311px) 100vw, 311px" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1.png"><noscript><img width="311" height="129" src="https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1.png" class="attachment-large size-large webpexpress-processed" alt="" srcset="https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1.png 311w, https://macanegracomboro.net/wp-content/uploads/2022/01/correios-1-1-300x124.png 300w" sizes="(max-width: 311px) 100vw, 311px"></noscript></picture>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-72573845" data-id="72573845" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-1b367ec9 elementor-widget elementor-widget-heading" data-id="1b367ec9" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">LINKS</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3bf844da elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="3bf844da" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://macanegracomboro.top/aviso-legal/">
+
+											<span class="elementor-icon-list-text">Aviso Legal</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www2.correios.com.br/sistemas/rastreamento/">
+
+											<span class="elementor-icon-list-text">Rastrear Pedido</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://macanegracomboro.top/termos-de-uso/">
+
+											<span class="elementor-icon-list-text">Termos e Condições</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://macanegracomboro.top/politicas-de-privacidade/">
+
+											<span class="elementor-icon-list-text">Política de Privacidade</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-1a0dfaa5" data-id="1a0dfaa5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-53a3629a elementor-widget elementor-widget-heading" data-id="53a3629a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">SITE 100% SEGURO</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-2110e09d elementor-widget elementor-widget-image" data-id="2110e09d" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="273" height="93" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20273%2093'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-src="https://macanegracomboro.net/wp-content/uploads/2022/01/seguro-1.png" /><noscript><img width="273" height="93" src="https://macanegracomboro.net/wp-content/uploads/2022/01/seguro-1.png" class="attachment-large size-large" alt="" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<div class="elementor-element elementor-element-22f24da1 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="22f24da1" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.6.5 - 27-04-2022 */
+.elementor-widget-divider{--divider-border-style:none;--divider-border-width:1px;--divider-color:#2c2c2c;--divider-icon-size:20px;--divider-element-spacing:10px;--divider-pattern-height:24px;--divider-pattern-size:20px;--divider-pattern-url:none;--divider-pattern-repeat:repeat-x}.elementor-widget-divider .elementor-divider{display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-widget-divider .elementor-divider__text{font-size:15px;line-height:1;max-width:95%}.elementor-widget-divider .elementor-divider__element{margin:0 var(--divider-element-spacing);-ms-flex-negative:0;flex-shrink:0}.elementor-widget-divider .elementor-icon{font-size:var(--divider-icon-size)}.elementor-widget-divider .elementor-divider-separator{display:-webkit-box;display:-ms-flexbox;display:flex;margin:0;direction:ltr}.elementor-widget-divider--view-line_icon .elementor-divider-separator,.elementor-widget-divider--view-line_text .elementor-divider-separator{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.elementor-widget-divider--view-line_icon .elementor-divider-separator:after,.elementor-widget-divider--view-line_icon .elementor-divider-separator:before,.elementor-widget-divider--view-line_text .elementor-divider-separator:after,.elementor-widget-divider--view-line_text .elementor-divider-separator:before{display:block;content:"";border-bottom:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--element-align-left .elementor-divider .elementor-divider-separator>.elementor-divider__svg:first-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-left .elementor-divider-separator:before{content:none}.elementor-widget-divider--element-align-left .elementor-divider__element{margin-left:0}.elementor-widget-divider--element-align-right .elementor-divider .elementor-divider-separator>.elementor-divider__svg:last-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-right .elementor-divider-separator:after{content:none}.elementor-widget-divider--element-align-right .elementor-divider__element{margin-right:0}.elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator{border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--separator-type-pattern{--divider-border-style:none}.elementor-widget-divider--separator-type-pattern.elementor-widget-divider--view-line .elementor-divider-separator,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:after,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:before,.elementor-widget-divider--separator-type-pattern:not([class*=elementor-widget-divider--view]) .elementor-divider-separator{width:100%;min-height:var(--divider-pattern-height);-webkit-mask-size:var(--divider-pattern-size) 100%;mask-size:var(--divider-pattern-size) 100%;-webkit-mask-repeat:var(--divider-pattern-repeat);mask-repeat:var(--divider-pattern-repeat);background-color:var(--divider-color);-webkit-mask-image:var(--divider-pattern-url);mask-image:var(--divider-pattern-url)}.elementor-widget-divider--no-spacing{--divider-pattern-size:auto}.elementor-widget-divider--bg-round{--divider-pattern-repeat:round}.rtl .elementor-widget-divider .elementor-divider__text{direction:rtl}</style>		<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-13f2944f elementor-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="13f2944f" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+										<span class="elementor-icon-list-text">® MACA NEGRA COM BORO -  Todos direitos reservados <br>Amazon Pure<br>33.872.899/0001-91</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+							</div>
+		
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/macanegracomboro.net","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/themes/hello-elementor/assets/js/hello-frontend.min.js?ver=1.0.0' id='hello-theme-frontend-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-includes/js/imagesloaded.min.js?ver=4.1.4' id='imagesloaded-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.5.2' id='elementor-pro-webpack-runtime-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.6.5' id='elementor-webpack-runtime-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.6.5' id='elementor-frontend-modules-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='elementor-pro-frontend-js-before'>
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/macanegracomboro.net\/wp-admin\/admin-ajax.php","nonce":"dd3965aa7d","urls":{"assets":"https:\/\/macanegracomboro.net\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/macanegracomboro.net\/wp-json\/"},"i18n":{"toc_no_headings_found":"No headings were found on this page."},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"pt_BR","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/macanegracomboro.net\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.5.2' id='elementor-pro-frontend-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2' id='elementor-waypoints-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-includes/js/jquery/ui/core.min.js?ver=1.13.1' id='jquery-ui-core-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='elementor-frontend-js-before'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Compartilhar no Facebook","shareOnTwitter":"Compartilhar no Twitter","pinIt":"Fixar","download":"Baixar","downloadImage":"Baixar imagem","fullscreen":"Tela cheia","zoom":"Zoom","share":"Compartilhar","playVideo":"Reproduzir v\u00eddeo","previous":"Anterior","next":"Pr\u00f3ximo","close":"Fechar"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Celular","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Celular extra","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet extra","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.6.5","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"e_optimized_assets_loading":true,"e_optimized_css_loading":true,"a11y_improvements":true,"e_import_export":true,"additional_custom_breakpoints":true,"e_hidden_wordpress_widgets":true,"theme_builder_v2":true,"hello-theme-header-footer":true,"landing-pages":true,"elements-color-picker":true,"favorite-widgets":true,"admin-top-bar":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/macanegracomboro.net\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","hello_header_logo_type":"title","hello_footer_logo_type":"logo"},"post":{"id":8,"title":"Maca%20Negra%20Com%20Boro%20%E2%80%93%20Substituto%20Natural%20do%20Tribulus","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.6.5' id='elementor-frontend-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://macanegracomboro.net/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.5.2' id='pro-elements-handlers-js' defer></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://macanegracomboro.net/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>	<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1651834274 -->
